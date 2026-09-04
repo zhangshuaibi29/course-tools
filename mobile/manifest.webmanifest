@@ -1,0 +1,9 @@
+{
+  "name": "课程雷达 手机版",
+  "short_name": "课程雷达",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7fbff",
+  "theme_color": "#2f8f9d",
+  "icons": []
+}

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>课程雷达</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="bg-shape bg-shape-a"></div>
+  <div class="bg-shape bg-shape-b"></div>
+  <main class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">每周都清楚</p>
+        <h1>课程雷达</h1>
+        <p class="desc">一个轻量、好看、离线可用的课表软件。</p>
+      </div>
+      <div class="week-panel">
+        <label for="weekInput">当前周</label>
+        <div class="week-controls">
+          <button id="prevWeek" type="button" aria-label="上一周">-</button>
+          <input id="weekInput" type="number" min="1" value="1">
+          <button id="nextWeek" type="button" aria-label="下一周">+</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="layout">
+      <aside id="manageCard" class="card manage-card">
+        <button id="manageToggleBtn" class="sidebar-toggle" type="button" aria-expanded="true" aria-controls="manageCardContent" title="收拢课表管理">《</button>
+        <div id="manageCardContent">
+          <h2>课表管理</h2>
+          <p class="manage-desc">支持导入 `.json/.xls/.xlsx`，并可替换或删除当前课表。</p>
+        <div class="io-actions">
+          <label class="import-label">
+            导入课表（合并）
+            <input id="importFile" type="file" accept=".json,.xls,.xlsx,application/json,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+          </label>
+          <label class="import-label">
+            替换课表（覆盖）
+            <input id="replaceFile" type="file" accept=".json,.xls,.xlsx,application/json,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+          </label>
+          <button id="exportBtn" type="button">导出备份（JSON）</button>
+          <button id="editScheduleBtn" type="button">编辑课表</button>
+          <button id="clearBtn" type="button" class="danger">删除当前课表</button>
+        </div>
+        </div>
+      </aside>
+
+      <section class="card table-card">
+        <div class="table-header">
+          <h2>周课表</h2>
+          <div class="table-tools">
+            <p id="weekHint">第 1 周课程</p>
+            <div id="classFilterWrap" class="class-filter" hidden>
+              <span>显示班级</span>
+              <div id="classFilter" aria-label="显示班级"></div>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="timetable">
+            <thead>
+              <tr>
+                <th>节次</th>
+                <th>周一</th>
+                <th>周二</th>
+                <th>周三</th>
+                <th>周四</th>
+                <th>周五</th>
+                <th>周六</th>
+                <th>周日</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer class="author-footer">
+    <button id="aboutAuthorBtn" type="button">关于作者</button>
+    <span>zhangshuaibi29.cn</span>
+  </footer>
+  <div id="courseManagerModal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-course-manager></div>
+    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="courseManagerTitle">
+      <div class="modal-header">
+        <div>
+          <h2 id="courseManagerTitle">编辑课表</h2>
+          <p id="courseManagerHint">管理当前保存的全部课程</p>
+        </div>
+        <button id="closeCourseManagerBtn" class="modal-close" type="button" aria-label="关闭">×</button>
+      </div>
+      <div class="manager-toolbar">
+        <input id="courseManagerSearch" type="search" placeholder="搜索课程名称、教师、地点或班级">
+        <div class="manager-batch-actions">
+          <button type="button" data-manager-action="select-all">全选</button>
+          <button type="button" data-manager-action="invert">反选</button>
+          <button type="button" data-manager-action="clear-selection">全部取消</button>
+          <button type="button" class="danger-text" data-manager-action="delete-selected">删除选中</button>
+        </div>
+      </div>
+      <div id="courseManagerList" class="course-manager-list"></div>
+      <form id="courseEditorForm" class="course-editor" hidden>
+        <h3>编辑课程</h3>
+        <input id="editCourseId" type="hidden">
+        <label>
+          课程名称
+          <input id="editCourseName" type="text" required>
+        </label>
+        <div class="two-cols">
+          <label>
+            星期
+            <select id="editCourseDay">
+              <option value="1">周一</option>
+              <option value="2">周二</option>
+              <option value="3">周三</option>
+              <option value="4">周四</option>
+              <option value="5">周五</option>
+              <option value="6">周六</option>
+              <option value="7">周日</option>
+            </select>
+          </label>
+          <label>
+            班级/分组（留空为公共课）
+            <input id="editCourseClassName" type="text">
+          </label>
+        </div>
+        <div class="two-cols">
+          <label>
+            开始节
+            <input id="editCoursePeriodStart" type="number" min="1" max="12" required>
+          </label>
+          <label>
+            结束节
+            <input id="editCoursePeriodEnd" type="number" min="1" max="12" required>
+          </label>
+        </div>
+        <label>
+          周次
+          <input id="editCourseWeeks" type="text" placeholder="例如：1-16 或 1,3,5">
+        </label>
+        <label>
+          教师
+          <input id="editCourseTeacher" type="text">
+        </label>
+        <label>
+          地点
+          <input id="editCourseLocation" type="text">
+        </label>
+        <div class="modal-actions">
+          <button id="cancelCourseEditBtn" type="button">取消编辑</button>
+          <button class="primary" type="submit">保存课程</button>
+        </div>
+      </form>
+    </section>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
