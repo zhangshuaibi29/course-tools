@@ -1,0 +1,225 @@
+:root {
+  --bg: #f7fbff;
+  --ink: #102a43;
+  --muted: #5c6f85;
+  --card: #ffffff;
+  --line: #d9e3ef;
+  --accent: #2f8f9d;
+  --accent-2: #ff8e3c;
+  --danger: #c03737;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #f9fbff 0%, #eef7ff 100%);
+  color: var(--ink);
+  font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+.app {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.hero {
+  padding: 10px 2px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+.hero p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.week-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 40px;
+  gap: 8px;
+  align-items: center;
+}
+
+.week-row button {
+  border: 0;
+  border-radius: 10px;
+  background: var(--accent-2);
+  color: #fff;
+  height: 40px;
+  font-size: 20px;
+}
+
+.week-row label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.week-row input {
+  width: 88px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  height: 38px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.status {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.class-filter {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.class-filter > span {
+  font-weight: 700;
+}
+
+.class-filter-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.class-filter-actions button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 4px 8px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.class-filter-actions button:disabled {
+  opacity: 0.5;
+}
+
+.class-filter-options {
+  display: grid;
+  gap: 5px;
+}
+
+.class-filter-options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.class-filter-options input {
+  flex: 0 0 auto;
+  margin: 2px 0 0;
+}
+
+.actions {
+  display: grid;
+  gap: 8px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  height: 44px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+label.btn input {
+  display: none;
+}
+
+.danger {
+  background: #ffe8e8;
+  color: var(--danger);
+}
+
+.day-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.day-tabs button {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f8fbff;
+  color: var(--ink);
+  height: 38px;
+  font-size: 14px;
+}
+
+.day-tabs button.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.course-list {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.course-card {
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--accent-2);
+  border-radius: 12px;
+  background: #fff;
+  padding: 10px;
+}
+
+.course-card strong {
+  font-size: 16px;
+}
+
+.course-card p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 14px;
+  padding: 8px 0;
+}

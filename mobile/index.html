@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>课程雷达 手机版</title>
+  <meta name="theme-color" content="#2f8f9d">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./mobile.css">
+</head>
+<body>
+  <main class="app">
+    <header class="hero">
+      <h1>课程雷达</h1>
+      <p>手机版</p>
+    </header>
+
+    <section class="panel">
+      <div class="week-row">
+        <button id="prevWeek" type="button">-</button>
+        <label>
+          第
+          <input id="weekInput" type="number" min="1" value="1">
+          周
+        </label>
+        <button id="nextWeek" type="button">+</button>
+      </div>
+      <div id="statusText" class="status">请导入课表文件</div>
+      <div id="classFilterWrap" class="class-filter" hidden>
+        <span>显示班级</span>
+        <div id="classFilter" aria-label="显示班级"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>课表管理</h2>
+      <div class="actions">
+        <label class="btn">
+          导入（合并）
+          <input id="importFile" type="file" accept=".json,.xls,.xlsx,application/json,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </label>
+        <label class="btn">
+          替换（覆盖）
+          <input id="replaceFile" type="file" accept=".json,.xls,.xlsx,application/json,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </label>
+        <button id="exportBtn" type="button" class="btn">导出备份</button>
+        <button id="clearBtn" type="button" class="btn danger">删除课表</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>按天查看</h2>
+      <div id="dayTabs" class="day-tabs"></div>
+      <div id="courseList" class="course-list"></div>
+    </section>
+  </main>
+
+  <script src="./vendor/xlsx.full.min.js"></script>
+  <script src="./mobile.js"></script>
+</body>
+</html>
